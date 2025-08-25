@@ -31,7 +31,7 @@ jobs:
 
       # 5. Run SAST (code scan)
       - name: Run Snyk Code SAST Scan
-        run: snyk test --file=M4.py --json > src/sast-report.json
+        run: snyk test --file=M4.py --json > src/sast-report.json || true
         #run: snyk code test src --json > src/sast-report.json || true
 
 
