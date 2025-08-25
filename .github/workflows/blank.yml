@@ -1,0 +1,41 @@
+name: Snyk SAST Scan
+
+on:
+  push:
+    branches: [ "main" ]   # Trigger only when code is pushed to main branch
+  pull_request:            # (Optional) Run on PRs as well
+    branches: [ "main" ]
+
+jobs:
+  snyk-sast:
+    runs-on: ubuntu-latest   # Runner environment (Linux VM)
+
+    steps:
+      # 1. Checkout repository
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # 2. Install Node.js (needed for Snyk CLI)
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      # 3. Install Snyk CLI globally
+      - name: Install Snyk CLI
+        run: npm install -g snyk
+
+      # 4. Authenticate with Snyk
+      - name: Authenticate Snyk
+        run: snyk auth ${{ secrets.SNYK_TOKEN }}
+
+      # 5. Run SAST (code scan)
+      - name: Run Snyk Code SAST Scan
+        run: snyk code test --json > snyk/reports/sast-report.json
+
+      # 6. Upload report as pipeline artifact
+      - name: Upload Snyk SAST Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: snyk-sast-report
+          path: snyk/reports/sast-report.json
