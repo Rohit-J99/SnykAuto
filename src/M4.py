@@ -146,6 +146,7 @@ if __name__ == "__main__":
             speak("Opening Your Favorite Photos")
             # print(photo)
             os.startfile(os.path.join(photo_dir, photo[0]))
+            
 
         elif 'what is the time' in query:
             strTime = datetime.datetime.now().strftime("%H:%M:%S")    
