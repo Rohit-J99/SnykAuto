@@ -31,8 +31,8 @@ jobs:
 
       # 5. Run SAST (code scan)
       - name: Run Snyk Code SAST Scan
-        #run: snyk code test src/M4.py --json --fail-on=none > src/sast-report.json
-        run: snyk code test src --json > src/sast-report.json || true
+        run: snyk test --file=M4.py --json > src/sast-report.json
+        #run: snyk code test src --json > src/sast-report.json || true
 
 
       # 6. Upload report as pipeline artifact
