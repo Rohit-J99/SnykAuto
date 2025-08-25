@@ -31,11 +31,11 @@ jobs:
 
       # 5. Run SAST (code scan)
       - name: Run Snyk Code SAST Scan
-        run: snyk code test --json > snyk/reports/sast-report.json
+        run: snyk code test --json > src/sast-report.json
 
       # 6. Upload report as pipeline artifact
       - name: Upload Snyk SAST Report
         uses: actions/upload-artifact@v4
         with:
           name: snyk-sast-report
-          path: reports
+          path: src/sast-report.json
