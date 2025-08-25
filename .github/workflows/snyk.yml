@@ -38,4 +38,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: snyk-sast-report
-          path: snyk/reports/sast-report.json
+          path: reports
